@@ -1,256 +1,795 @@
-const jobForm = document.getElementById("jobForm");
+const jobForm =
+    document.getElementById("jobForm");
 
-const companyInput = document.getElementById("company");
-const roleInput = document.getElementById("role");
-const dateInput = document.getElementById("date");
-const jobLinkInput = document.getElementById("jobLink");
-const statusInput = document.getElementById("status");
+const companyInput =
+    document.getElementById("company");
 
-const applicationsList = document.getElementById("applicationsList");
-const emptyMessage = document.getElementById("emptyMessage");
+const roleInput =
+    document.getElementById("role");
 
-const searchInput = document.getElementById("searchInput");
-const filterStatus = document.getElementById("filterStatus");
+const dateInput =
+    document.getElementById("date");
 
-const totalApplications = document.getElementById("totalApplications");
-const appliedCount = document.getElementById("appliedCount");
-const interviewCount = document.getElementById("interviewCount");
-const selectedCount = document.getElementById("selectedCount");
-const rejectedCount = document.getElementById("rejectedCount");
+const interviewDateInput =
+    document.getElementById("interviewDate");
 
-let applications = JSON.parse(localStorage.getItem("jobApplications")) || [];
+const salaryInput =
+    document.getElementById("salary");
 
-// Add Application
-jobForm.addEventListener("submit", function (event) {
+const locationInput =
+    document.getElementById("location");
 
-    event.preventDefault();
+const statusInput =
+    document.getElementById("status");
 
-    const application = {
-        id: Date.now(),
-        company: companyInput.value.trim(),
-        role: roleInput.value.trim(),
-        date: dateInput.value,
-        link: jobLinkInput.value.trim(),
-        status: statusInput.value
-    };
+const jobLinkInput =
+    document.getElementById("jobLink");
 
-    applications.push(application);
+const notesInput =
+    document.getElementById("notes");
 
-    saveApplications();
-    renderApplications();
+const applicationsList =
+    document.getElementById("applicationsList");
 
-    jobForm.reset();
+const emptyMessage =
+    document.getElementById("emptyMessage");
 
-});
+const searchInput =
+    document.getElementById("searchInput");
 
-// Save to Local Storage
+const filterStatus =
+    document.getElementById("filterStatus");
+
+const totalApplications =
+    document.getElementById("totalApplications");
+
+const appliedCount =
+    document.getElementById("appliedCount");
+
+const interviewCount =
+    document.getElementById("interviewCount");
+
+const selectedCount =
+    document.getElementById("selectedCount");
+
+const rejectedCount =
+    document.getElementById("rejectedCount");
+
+const submitBtn =
+    document.getElementById("submitBtn");
+
+const cancelBtn =
+    document.getElementById("cancelBtn");
+
+const formTitle =
+    document.getElementById("formTitle");
+
+const themeToggle =
+    document.getElementById("themeToggle");
+
+
+/* ==========================
+   APPLICATION DATA
+========================== */
+
+let applications =
+    JSON.parse(
+        localStorage.getItem(
+            "jobApplications"
+        )
+    ) || [];
+
+
+let editingId = null;
+
+
+/* ==========================
+   ADD / UPDATE
+========================== */
+
+jobForm.addEventListener(
+    "submit",
+    function (event) {
+
+        event.preventDefault();
+
+
+        const applicationData = {
+
+            company:
+                companyInput.value.trim(),
+
+            role:
+                roleInput.value.trim(),
+
+            date:
+                dateInput.value,
+
+            interviewDate:
+                interviewDateInput.value,
+
+            salary:
+                salaryInput.value.trim(),
+
+            location:
+                locationInput.value.trim(),
+
+            status:
+                statusInput.value,
+
+            link:
+                jobLinkInput.value.trim(),
+
+            notes:
+                notesInput.value.trim()
+
+        };
+
+
+        if (editingId !== null) {
+
+            applications =
+                applications.map(
+                    application => {
+
+                        if (
+                            application.id ===
+                            editingId
+                        ) {
+
+                            return {
+
+                                ...application,
+
+                                ...applicationData
+
+                            };
+
+                        }
+
+
+                        return application;
+
+                    }
+                );
+
+
+            alert(
+                "Application updated successfully!"
+            );
+
+        } else {
+
+            const newApplication = {
+
+                id: Date.now(),
+
+                ...applicationData
+
+            };
+
+
+            applications.push(
+                newApplication
+            );
+
+
+            alert(
+                "Application added successfully!"
+            );
+
+        }
+
+
+        saveApplications();
+
+        renderApplications();
+
+        resetForm();
+
+    }
+);
+
+
+/* ==========================
+   SAVE DATA
+========================== */
+
 function saveApplications() {
 
     localStorage.setItem(
         "jobApplications",
-        JSON.stringify(applications)
+        JSON.stringify(
+            applications
+        )
     );
 
 }
 
-// Render Applications
+
+/* ==========================
+   RENDER
+========================== */
+
 function renderApplications() {
 
-    const searchText = searchInput.value.toLowerCase();
-    const selectedFilter = filterStatus.value;
+    const searchText =
+        searchInput.value
+            .trim()
+            .toLowerCase();
 
-    const filteredApplications = applications.filter(application => {
 
-        const matchesSearch =
-            application.company.toLowerCase().includes(searchText) ||
-            application.role.toLowerCase().includes(searchText);
+    const selectedFilter =
+        filterStatus.value;
 
-        const matchesStatus =
-            selectedFilter === "All" ||
-            application.status === selectedFilter;
 
-        return matchesSearch && matchesStatus;
+    const filteredApplications =
+        applications.filter(
+            application => {
 
-    });
+                const matchesSearch =
+
+                    application.company
+                        .toLowerCase()
+                        .includes(
+                            searchText
+                        )
+
+                    ||
+
+                    application.role
+                        .toLowerCase()
+                        .includes(
+                            searchText
+                        )
+
+                    ||
+
+                    application.location
+                        .toLowerCase()
+                        .includes(
+                            searchText
+                        );
+
+
+                const matchesStatus =
+
+                    selectedFilter ===
+                    "All"
+
+                    ||
+
+                    application.status ===
+                    selectedFilter;
+
+
+                return (
+                    matchesSearch &&
+                    matchesStatus
+                );
+
+            }
+        );
+
 
     applicationsList.innerHTML = "";
 
-    if (filteredApplications.length === 0) {
 
-        emptyMessage.style.display = "block";
+    if (
+        filteredApplications.length ===
+        0
+    ) {
+
+        emptyMessage.style.display =
+            "block";
 
     } else {
 
-        emptyMessage.style.display = "none";
+        emptyMessage.style.display =
+            "none";
 
-        filteredApplications.forEach(application => {
 
-            const card = document.createElement("div");
+        filteredApplications.forEach(
+            application => {
 
-            card.className = "application-card";
+                const card =
+                    document.createElement(
+                        "div"
+                    );
 
-            card.innerHTML = `
 
-                <div>
+                card.className =
+                    "application-card";
 
-                    <h3>${escapeHTML(application.company)}</h3>
 
-                    <p class="role">
-                        ${escapeHTML(application.role)}
-                    </p>
+                card.innerHTML = `
 
-                    <span class="status status-${application.status}">
-                        ${application.status}
-                    </span>
+                    <div class="card-top">
 
-                    <div class="details">
+                        <div>
 
-                        <span>
-                            📅 ${formatDate(application.date)}
-                        </span>
+                            <h3 class="company-name">
+                                ${escapeHTML(
+                                    application.company
+                                )}
+                            </h3>
 
-                        ${
-                            application.link
-                            ? `<span>🔗 Job Link Available</span>`
-                            : ""
-                        }
+                            <p class="role">
+                                ${escapeHTML(
+                                    application.role
+                                )}
+                            </p>
+
+                            <span class="status status-${application.status}">
+                                ${application.status}
+                            </span>
+
+                            <div class="details">
+
+                                <span>
+                                    📅 Applied:
+                                    ${formatDate(
+                                        application.date
+                                    )}
+                                </span>
+
+                                ${
+                                    application.interviewDate
+                                    ? `
+                                        <span>
+                                            🎯 Interview:
+                                            ${formatDate(
+                                                application.interviewDate
+                                            )}
+                                        </span>
+                                    `
+                                    : ""
+                                }
+
+                                ${
+                                    application.salary
+                                    ? `
+                                        <span>
+                                            💰 ${escapeHTML(
+                                                application.salary
+                                            )}
+                                        </span>
+                                    `
+                                    : ""
+                                }
+
+                                ${
+                                    application.location
+                                    ? `
+                                        <span>
+                                            📍 ${escapeHTML(
+                                                application.location
+                                            )}
+                                        </span>
+                                    `
+                                    : ""
+                                }
+
+                            </div>
+
+                            ${
+                                application.notes
+                                ? `
+                                    <div class="notes">
+                                        📝 ${escapeHTML(
+                                            application.notes
+                                        )}
+                                    </div>
+                                `
+                                : ""
+                            }
+
+                        </div>
+
+
+                        <div class="card-actions">
+
+                            ${
+                                application.link
+                                ? `
+                                    <button
+                                        class="view-btn"
+                                        onclick="openJobLink('${encodeURIComponent(
+                                            application.link
+                                        )}')"
+                                    >
+                                        View
+                                    </button>
+                                `
+                                : ""
+                            }
+
+
+                            <button
+                                class="edit-btn"
+                                onclick="editApplication(
+                                    ${application.id}
+                                )"
+                            >
+                                Edit
+                            </button>
+
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteApplication(
+                                    ${application.id}
+                                )"
+                            >
+                                Delete
+                            </button>
+
+                        </div>
 
                     </div>
 
-                </div>
+                `;
 
-                <div class="actions">
 
-                    ${
-                        application.link
-                        ? `
-                            <button
-                                class="view-btn"
-                                onclick="openJobLink('${application.link}')"
-                            >
-                                View
-                            </button>
-                        `
-                        : ""
-                    }
+                applicationsList.appendChild(
+                    card
+                );
 
-                    <button
-                        class="delete-btn"
-                        onclick="deleteApplication(${application.id})"
-                    >
-                        Delete
-                    </button>
-
-                </div>
-
-            `;
-
-            applicationsList.appendChild(card);
-
-        });
+            }
+        );
 
     }
+
 
     updateDashboard();
 
 }
 
-// Delete Application
-function deleteApplication(id) {
 
-    const confirmed = confirm(
-        "Are you sure you want to delete this application?"
-    );
+/* ==========================
+   EDIT
+========================== */
 
-    if (!confirmed) {
+function editApplication(id) {
+
+    const application =
+        applications.find(
+            item => item.id === id
+        );
+
+
+    if (!application) {
+
         return;
+
     }
 
-    applications = applications.filter(
-        application => application.id !== id
-    );
+
+    editingId = id;
+
+
+    companyInput.value =
+        application.company;
+
+    roleInput.value =
+        application.role;
+
+    dateInput.value =
+        application.date;
+
+    interviewDateInput.value =
+        application.interviewDate || "";
+
+    salaryInput.value =
+        application.salary || "";
+
+    locationInput.value =
+        application.location || "";
+
+    statusInput.value =
+        application.status;
+
+    jobLinkInput.value =
+        application.link || "";
+
+    notesInput.value =
+        application.notes || "";
+
+
+    formTitle.textContent =
+        "Edit Job Application";
+
+    submitBtn.textContent =
+        "Update Application";
+
+    cancelBtn.style.display =
+        "inline-block";
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* ==========================
+   CANCEL EDIT
+========================== */
+
+cancelBtn.addEventListener(
+    "click",
+    resetForm
+);
+
+
+function resetForm() {
+
+    jobForm.reset();
+
+    editingId = null;
+
+    formTitle.textContent =
+        "Add Job Application";
+
+    submitBtn.textContent =
+        "+ Add Application";
+
+    cancelBtn.style.display =
+        "none";
+
+}
+
+
+/* ==========================
+   DELETE
+========================== */
+
+function deleteApplication(id) {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this application?"
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    applications =
+        applications.filter(
+            application =>
+                application.id !== id
+        );
+
 
     saveApplications();
+
     renderApplications();
 
 }
 
-// Open Job Link
-function openJobLink(link) {
 
-    window.open(link, "_blank");
+/* ==========================
+   OPEN JOB LINK
+========================== */
+
+function openJobLink(
+    encodedLink
+) {
+
+    const link =
+        decodeURIComponent(
+            encodedLink
+        );
+
+
+    window.open(
+        link,
+        "_blank",
+        "noopener,noreferrer"
+    );
 
 }
 
-// Format Date
+
+/* ==========================
+   DATE FORMAT
+========================== */
+
 function formatDate(date) {
 
     if (!date) {
+
         return "Not specified";
+
     }
 
-    const formattedDate = new Date(date);
+
+    const formattedDate =
+        new Date(date);
+
 
     return formattedDate.toLocaleDateString(
         "en-IN",
         {
+
             day: "2-digit",
+
             month: "short",
+
             year: "numeric"
+
         }
     );
 
 }
 
-// Dashboard Statistics
+
+/* ==========================
+   DASHBOARD
+========================== */
+
 function updateDashboard() {
 
-    totalApplications.textContent = applications.length;
+    totalApplications.textContent =
+        applications.length;
+
 
     appliedCount.textContent =
         applications.filter(
-            application => application.status === "Applied"
+            application =>
+                application.status ===
+                "Applied"
         ).length;
+
 
     interviewCount.textContent =
         applications.filter(
-            application => application.status === "Interview"
+            application =>
+                application.status ===
+                "Interview"
         ).length;
+
 
     selectedCount.textContent =
         applications.filter(
-            application => application.status === "Selected"
+            application =>
+                application.status ===
+                "Selected"
         ).length;
+
 
     rejectedCount.textContent =
         applications.filter(
-            application => application.status === "Rejected"
+            application =>
+                application.status ===
+                "Rejected"
         ).length;
 
 }
 
-// Search
+
+/* ==========================
+   SEARCH
+========================== */
+
 searchInput.addEventListener(
     "input",
     renderApplications
 );
 
-// Filter
+
+/* ==========================
+   FILTER
+========================== */
+
 filterStatus.addEventListener(
     "change",
     renderApplications
 );
 
-// Basic HTML Security
+
+/* ==========================
+   HTML SECURITY
+========================== */
+
 function escapeHTML(text) {
 
-    const div = document.createElement("div");
+    const div =
+        document.createElement(
+            "div"
+        );
+
 
     div.textContent = text;
+
 
     return div.innerHTML;
 
 }
 
-// Initial Load
+
+/* ==========================
+   DARK / LIGHT MODE
+========================== */
+
+const savedTheme =
+    localStorage.getItem(
+        "jobTrackTheme"
+    );
+
+
+if (savedTheme === "light") {
+
+    document.body.classList.add(
+        "light-mode"
+    );
+
+    themeToggle.textContent =
+        "🌙 Dark Mode";
+
+} else {
+
+    themeToggle.textContent =
+        "☀️ Light Mode";
+
+}
+
+
+themeToggle.addEventListener(
+    "click",
+    function () {
+
+        document.body.classList.toggle(
+            "light-mode"
+        );
+
+
+        const isLight =
+            document.body.classList.contains(
+                "light-mode"
+            );
+
+
+        if (isLight) {
+
+            themeToggle.textContent =
+                "🌙 Dark Mode";
+
+
+            localStorage.setItem(
+                "jobTrackTheme",
+                "light"
+            );
+
+        } else {
+
+            themeToggle.textContent =
+                "☀️ Light Mode";
+
+
+            localStorage.setItem(
+                "jobTrackTheme",
+                "dark"
+            );
+
+        }
+
+    }
+);
+
+
+/* ==========================
+   INITIAL LOAD
+========================== */
+
 renderApplications();
