@@ -1,31 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>JobTrack - Job Application Tracker</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
 
+
 <body>
+
 
 <header class="header">
 
     <div>
+
         <h1>JobTrack</h1>
-        <p>Track your career journey</p>
+
+        <p>
+            Track your career journey
+        </p>
+
     </div>
 
-    <button id="themeToggle" class="theme-btn">
+
+    <button
+        id="themeToggle"
+        class="theme-btn"
+    >
         ☀️ Light Mode
     </button>
 
 </header>
 
 
+
 <main class="container">
+
 
     <!-- =========================
          DASHBOARD
@@ -33,32 +56,78 @@
 
     <section class="dashboard">
 
-        <div class="stat-card">
-            <span>Total Applications</span>
-            <strong id="totalApplications">0</strong>
-        </div>
 
         <div class="stat-card">
-            <span>Applied</span>
-            <strong id="appliedCount">0</strong>
+
+            <span>
+                Total Applications
+            </span>
+
+            <strong id="totalApplications">
+                0
+            </strong>
+
         </div>
 
-        <div class="stat-card">
-            <span>Interviews</span>
-            <strong id="interviewCount">0</strong>
-        </div>
+
 
         <div class="stat-card">
-            <span>Selected</span>
-            <strong id="selectedCount">0</strong>
+
+            <span>
+                Applied
+            </span>
+
+            <strong id="appliedCount">
+                0
+            </strong>
+
         </div>
 
+
+
         <div class="stat-card">
-            <span>Rejected</span>
-            <strong id="rejectedCount">0</strong>
+
+            <span>
+                Interviews
+            </span>
+
+            <strong id="interviewCount">
+                0
+            </strong>
+
         </div>
+
+
+
+        <div class="stat-card">
+
+            <span>
+                Selected
+            </span>
+
+            <strong id="selectedCount">
+                0
+            </strong>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <span>
+                Rejected
+            </span>
+
+            <strong id="rejectedCount">
+                0
+            </strong>
+
+        </div>
+
 
     </section>
+
 
 
     <!-- =========================
@@ -67,38 +136,62 @@
 
     <section class="analytics-section">
 
+
         <div class="analytics-header">
 
+
             <div>
-                <h2>Application Analytics</h2>
+
+                <h2>
+                    Application Analytics
+                </h2>
 
                 <p>
                     Track your application progress
                 </p>
+
             </div>
 
+
             <div class="success-rate">
-                <span>Success Rate</span>
-                <strong id="successRate">0%</strong>
+
+                <span>
+                    Success Rate
+                </span>
+
+                <strong id="successRate">
+                    0%
+                </strong>
+
             </div>
+
 
         </div>
 
 
+
         <div class="chart-container">
 
+
             <div class="bar-chart">
+
 
                 <div class="chart-item">
 
                     <div class="bar-value">
-                        <span id="chartAppliedValue">0</span>
+
+                        <span id="chartAppliedValue">
+                            0
+                        </span>
+
                     </div>
+
 
                     <div
                         class="bar applied-bar"
                         id="appliedBar"
                     ></div>
+
 
                     <span class="chart-label">
                         Applied
@@ -107,16 +200,23 @@
                 </div>
 
 
+
                 <div class="chart-item">
 
                     <div class="bar-value">
-                        <span id="chartInterviewValue">0</span>
+
+                        <span id="chartInterviewValue">
+                            0
+                        </span>
+
                     </div>
+
 
                     <div
                         class="bar interview-bar"
                         id="interviewBar"
                     ></div>
+
 
                     <span class="chart-label">
                         Interview
@@ -125,16 +225,23 @@
                 </div>
 
 
+
                 <div class="chart-item">
 
                     <div class="bar-value">
-                        <span id="chartSelectedValue">0</span>
+
+                        <span id="chartSelectedValue">
+                            0
+                        </span>
+
                     </div>
+
 
                     <div
                         class="bar selected-bar"
                         id="selectedBar"
                     ></div>
+
 
                     <span class="chart-label">
                         Selected
@@ -143,16 +250,23 @@
                 </div>
 
 
+
                 <div class="chart-item">
 
                     <div class="bar-value">
-                        <span id="chartRejectedValue">0</span>
+
+                        <span id="chartRejectedValue">
+                            0
+                        </span>
+
                     </div>
+
 
                     <div
                         class="bar rejected-bar"
                         id="rejectedBar"
                     ></div>
+
 
                     <span class="chart-label">
                         Rejected
@@ -160,11 +274,14 @@
 
                 </div>
 
+
             </div>
 
         </div>
 
+
     </section>
+
 
 
     <!-- =========================
@@ -173,14 +290,18 @@
 
     <section class="form-section">
 
+
         <h2 id="formTitle">
             Add Job Application
         </h2>
 
 
+
         <form id="jobForm">
 
+
             <div class="form-grid">
+
 
                 <div class="input-group">
 
@@ -196,6 +317,7 @@
                     >
 
                 </div>
+
 
 
                 <div class="input-group">
@@ -214,6 +336,7 @@
                 </div>
 
 
+
                 <div class="input-group">
 
                     <label>
@@ -229,6 +352,7 @@
                 </div>
 
 
+
                 <div class="input-group">
 
                     <label>
@@ -241,6 +365,7 @@
                     >
 
                 </div>
+
 
 
                 <div class="input-group">
@@ -258,6 +383,7 @@
                 </div>
 
 
+
                 <div class="input-group">
 
                     <label>
@@ -273,11 +399,13 @@
                 </div>
 
 
+
                 <div class="input-group">
 
                     <label>
                         Status
                     </label>
+
 
                     <select id="status">
 
@@ -302,6 +430,7 @@
                 </div>
 
 
+
                 <div class="input-group">
 
                     <label>
@@ -316,7 +445,9 @@
 
                 </div>
 
+
             </div>
+
 
 
             <div class="input-group notes-group">
@@ -333,7 +464,9 @@
             </div>
 
 
+
             <div class="form-buttons">
+
 
                 <button
                     type="submit"
@@ -342,6 +475,7 @@
                 >
                     + Add Application
                 </button>
+
 
 
                 <button
@@ -353,11 +487,15 @@
                     Cancel Edit
                 </button>
 
+
             </div>
+
 
         </form>
 
+
     </section>
+
 
 
     <!-- =========================
@@ -366,7 +504,9 @@
 
     <section class="applications-section">
 
+
         <div class="section-header">
+
 
             <div>
 
@@ -381,45 +521,67 @@
             </div>
 
 
-            <div class="filters">
 
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="Search company or role..."
+            <div class="section-actions">
+
+
+                <div class="filters">
+
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search company or role..."
+                    >
+
+
+
+                    <select id="filterStatus">
+
+                        <option value="All">
+                            All Status
+                        </option>
+
+                        <option value="Applied">
+                            Applied
+                        </option>
+
+                        <option value="Interview">
+                            Interview
+                        </option>
+
+                        <option value="Selected">
+                            Selected
+                        </option>
+
+                        <option value="Rejected">
+                            Rejected
+                        </option>
+
+                    </select>
+
+
+                </div>
+
+
+
+                <button
+                    id="exportBtn"
+                    class="export-btn"
                 >
+                    📥 Export CSV
+                </button>
 
-
-                <select id="filterStatus">
-
-                    <option value="All">
-                        All Status
-                    </option>
-
-                    <option value="Applied">
-                        Applied
-                    </option>
-
-                    <option value="Interview">
-                        Interview
-                    </option>
-
-                    <option value="Selected">
-                        Selected
-                    </option>
-
-                    <option value="Rejected">
-                        Rejected
-                    </option>
-
-                </select>
 
             </div>
+
 
         </div>
 
 
+
         <div id="applicationsList"></div>
+
 
 
         <div
@@ -437,9 +599,12 @@
 
         </div>
 
+
     </section>
 
+
 </main>
+
 
 
 <footer>
@@ -452,7 +617,10 @@
 </footer>
 
 
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>

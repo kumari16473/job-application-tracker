@@ -1,5 +1,5 @@
 /* =========================
-   GET HTML ELEMENTS
+   GET ELEMENTS
 ========================= */
 
 const jobForm =
@@ -33,43 +33,74 @@ const notesInput =
     document.getElementById("notes");
 
 const applicationsList =
-    document.getElementById("applicationsList");
+    document.getElementById(
+        "applicationsList"
+    );
 
 const emptyMessage =
-    document.getElementById("emptyMessage");
+    document.getElementById(
+        "emptyMessage"
+    );
 
 const searchInput =
-    document.getElementById("searchInput");
+    document.getElementById(
+        "searchInput"
+    );
 
 const filterStatus =
-    document.getElementById("filterStatus");
+    document.getElementById(
+        "filterStatus"
+    );
 
 const totalApplications =
-    document.getElementById("totalApplications");
+    document.getElementById(
+        "totalApplications"
+    );
 
 const appliedCount =
-    document.getElementById("appliedCount");
+    document.getElementById(
+        "appliedCount"
+    );
 
 const interviewCount =
-    document.getElementById("interviewCount");
+    document.getElementById(
+        "interviewCount"
+    );
 
 const selectedCount =
-    document.getElementById("selectedCount");
+    document.getElementById(
+        "selectedCount"
+    );
 
 const rejectedCount =
-    document.getElementById("rejectedCount");
+    document.getElementById(
+        "rejectedCount"
+    );
 
 const submitBtn =
-    document.getElementById("submitBtn");
+    document.getElementById(
+        "submitBtn"
+    );
 
 const cancelBtn =
-    document.getElementById("cancelBtn");
+    document.getElementById(
+        "cancelBtn"
+    );
 
 const formTitle =
-    document.getElementById("formTitle");
+    document.getElementById(
+        "formTitle"
+    );
 
 const themeToggle =
-    document.getElementById("themeToggle");
+    document.getElementById(
+        "themeToggle"
+    );
+
+const exportBtn =
+    document.getElementById(
+        "exportBtn"
+    );
 
 
 /* =========================
@@ -77,16 +108,24 @@ const themeToggle =
 ========================= */
 
 const appliedBar =
-    document.getElementById("appliedBar");
+    document.getElementById(
+        "appliedBar"
+    );
 
 const interviewBar =
-    document.getElementById("interviewBar");
+    document.getElementById(
+        "interviewBar"
+    );
 
 const selectedBar =
-    document.getElementById("selectedBar");
+    document.getElementById(
+        "selectedBar"
+    );
 
 const rejectedBar =
-    document.getElementById("rejectedBar");
+    document.getElementById(
+        "rejectedBar"
+    );
 
 const chartAppliedValue =
     document.getElementById(
@@ -115,7 +154,7 @@ const successRate =
 
 
 /* =========================
-   DATA
+   APPLICATION DATA
 ========================= */
 
 let applications =
@@ -130,7 +169,7 @@ let editingId = null;
 
 
 /* =========================
-   ADD / UPDATE
+   ADD / UPDATE APPLICATION
 ========================= */
 
 jobForm.addEventListener(
@@ -174,6 +213,7 @@ jobForm.addEventListener(
 
         if (editingId !== null) {
 
+
             applications =
                 applications.map(
                     application => {
@@ -204,7 +244,9 @@ jobForm.addEventListener(
                 "Application updated successfully!"
             );
 
+
         } else {
+
 
             const newApplication = {
 
@@ -238,7 +280,7 @@ jobForm.addEventListener(
 
 
 /* =========================
-   SAVE
+   SAVE DATA
 ========================= */
 
 function saveApplications() {
@@ -272,6 +314,7 @@ function renderApplications() {
     const filteredApplications =
         applications.filter(
             application => {
+
 
                 const matchesSearch =
 
@@ -318,7 +361,8 @@ function renderApplications() {
         );
 
 
-    applicationsList.innerHTML = "";
+    applicationsList.innerHTML =
+        "";
 
 
     if (
@@ -326,10 +370,13 @@ function renderApplications() {
         0
     ) {
 
+
         emptyMessage.style.display =
             "block";
 
+
     } else {
+
 
         emptyMessage.style.display =
             "none";
@@ -337,6 +384,7 @@ function renderApplications() {
 
         filteredApplications.forEach(
             application => {
+
 
                 const card =
                     document.createElement(
@@ -355,29 +403,43 @@ function renderApplications() {
                         <div>
 
                             <h3 class="company-name">
+
                                 ${escapeHTML(
                                     application.company
                                 )}
+
                             </h3>
 
+
                             <p class="role">
+
                                 ${escapeHTML(
                                     application.role
                                 )}
+
                             </p>
 
-                            <span class="status status-${application.status}">
+
+                            <span
+                                class="status status-${application.status}"
+                            >
+
                                 ${application.status}
+
                             </span>
 
 
                             <div class="details">
 
+
                                 <span>
+
                                     📅 Applied:
+
                                     ${formatDate(
                                         application.date
                                     )}
+
                                 </span>
 
 
@@ -385,10 +447,13 @@ function renderApplications() {
                                     application.interviewDate
                                     ? `
                                         <span>
+
                                             🎯 Interview:
+
                                             ${formatDate(
                                                 application.interviewDate
                                             )}
+
                                         </span>
                                     `
                                     : ""
@@ -399,9 +464,13 @@ function renderApplications() {
                                     application.salary
                                     ? `
                                         <span>
-                                            💰 ${escapeHTML(
+
+                                            💰
+
+                                            ${escapeHTML(
                                                 application.salary
                                             )}
+
                                         </span>
                                     `
                                     : ""
@@ -412,13 +481,18 @@ function renderApplications() {
                                     application.location
                                     ? `
                                         <span>
-                                            📍 ${escapeHTML(
+
+                                            📍
+
+                                            ${escapeHTML(
                                                 application.location
                                             )}
+
                                         </span>
                                     `
                                     : ""
                                 }
+
 
                             </div>
 
@@ -427,18 +501,24 @@ function renderApplications() {
                                 application.notes
                                 ? `
                                     <div class="notes">
-                                        📝 ${escapeHTML(
+
+                                        📝
+
+                                        ${escapeHTML(
                                             application.notes
                                         )}
+
                                     </div>
                                 `
                                 : ""
                             }
 
+
                         </div>
 
 
                         <div class="card-actions">
+
 
                             ${
                                 application.link
@@ -449,7 +529,9 @@ function renderApplications() {
                                             application.link
                                         )}')"
                                     >
+
                                         View
+
                                     </button>
                                 `
                                 : ""
@@ -462,7 +544,9 @@ function renderApplications() {
                                     ${application.id}
                                 )"
                             >
+
                                 Edit
+
                             </button>
 
 
@@ -472,10 +556,14 @@ function renderApplications() {
                                     ${application.id}
                                 )"
                             >
+
                                 Delete
+
                             </button>
 
+
                         </div>
+
 
                     </div>
 
@@ -503,9 +591,11 @@ function renderApplications() {
 
 function editApplication(id) {
 
+
     const application =
         applications.find(
-            item => item.id === id
+            item =>
+                item.id === id
         );
 
 
@@ -602,6 +692,7 @@ function resetForm() {
 
 function deleteApplication(id) {
 
+
     const confirmed =
         confirm(
             "Are you sure you want to delete this application?"
@@ -637,6 +728,7 @@ function openJobLink(
     encodedLink
 ) {
 
+
     const link =
         decodeURIComponent(
             encodedLink
@@ -653,10 +745,11 @@ function openJobLink(
 
 
 /* =========================
-   DATE
+   FORMAT DATE
 ========================= */
 
 function formatDate(date) {
+
 
     if (!date) {
 
@@ -686,10 +779,11 @@ function formatDate(date) {
 
 
 /* =========================
-   DASHBOARD + CHART
+   DASHBOARD
 ========================= */
 
 function updateDashboard() {
+
 
     const total =
         applications.length;
@@ -765,6 +859,7 @@ function updateChart(
     rejected,
     total
 ) {
+
 
     const maxValue =
         Math.max(
@@ -848,10 +943,172 @@ filterStatus.addEventListener(
 
 
 /* =========================
-   SECURITY
+   EXPORT CSV
+========================= */
+
+exportBtn.addEventListener(
+    "click",
+    exportToCSV
+);
+
+
+function exportToCSV() {
+
+
+    if (applications.length === 0) {
+
+        alert(
+            "No applications available to export."
+        );
+
+        return;
+
+    }
+
+
+    const headers = [
+
+        "Company",
+
+        "Job Role",
+
+        "Applied Date",
+
+        "Interview Date",
+
+        "Salary",
+
+        "Location",
+
+        "Status",
+
+        "Job Link",
+
+        "Notes"
+
+    ];
+
+
+    const rows =
+        applications.map(
+            application => [
+
+                application.company,
+
+                application.role,
+
+                application.date,
+
+                application.interviewDate || "",
+
+                application.salary || "",
+
+                application.location || "",
+
+                application.status,
+
+                application.link || "",
+
+                application.notes || ""
+
+            ]
+        );
+
+
+    const csvContent = [
+
+        headers,
+
+        ...rows
+
+    ]
+
+        .map(
+            row =>
+                row
+                    .map(
+                        value =>
+                            `"${String(value)
+                                .replace(
+                                    /"/g,
+                                    '""'
+                                )}"`
+                    )
+                    .join(",")
+        )
+
+        .join("\n");
+
+
+    const blob =
+        new Blob(
+            [
+                "\uFEFF" +
+                csvContent
+            ],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href = url;
+
+
+    const today =
+        new Date()
+            .toISOString()
+            .split("T")[0];
+
+
+    link.download =
+        `JobTrack-Applications-${today}.csv`;
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    document.body.removeChild(
+        link
+    );
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+
+    alert(
+        "Applications exported successfully!"
+    );
+
+}
+
+
+/* =========================
+   HTML SECURITY
 ========================= */
 
 function escapeHTML(text) {
+
 
     const div =
         document.createElement(
@@ -878,16 +1135,22 @@ const savedTheme =
     );
 
 
-if (savedTheme === "light") {
+if (
+    savedTheme === "light"
+) {
+
 
     document.body.classList.add(
         "light-mode"
     );
 
+
     themeToggle.textContent =
         "🌙 Dark Mode";
 
+
 } else {
+
 
     themeToggle.textContent =
         "☀️ Light Mode";
@@ -898,6 +1161,7 @@ if (savedTheme === "light") {
 themeToggle.addEventListener(
     "click",
     function () {
+
 
         document.body.classList.toggle(
             "light-mode"
@@ -912,6 +1176,7 @@ themeToggle.addEventListener(
 
         if (isLight) {
 
+
             themeToggle.textContent =
                 "🌙 Dark Mode";
 
@@ -921,7 +1186,9 @@ themeToggle.addEventListener(
                 "light"
             );
 
+
         } else {
+
 
             themeToggle.textContent =
                 "☀️ Light Mode";
