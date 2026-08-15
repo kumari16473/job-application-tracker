@@ -1,7 +1,3 @@
-/* =========================
-   GET ELEMENTS
-========================= */
-
 const jobForm =
     document.getElementById("jobForm");
 
@@ -33,129 +29,80 @@ const notesInput =
     document.getElementById("notes");
 
 const applicationsList =
-    document.getElementById(
-        "applicationsList"
-    );
+    document.getElementById("applicationsList");
 
 const emptyMessage =
-    document.getElementById(
-        "emptyMessage"
-    );
+    document.getElementById("emptyMessage");
 
 const searchInput =
-    document.getElementById(
-        "searchInput"
-    );
+    document.getElementById("searchInput");
 
 const filterStatus =
-    document.getElementById(
-        "filterStatus"
-    );
+    document.getElementById("filterStatus");
 
 const totalApplications =
-    document.getElementById(
-        "totalApplications"
-    );
+    document.getElementById("totalApplications");
 
 const appliedCount =
-    document.getElementById(
-        "appliedCount"
-    );
+    document.getElementById("appliedCount");
 
 const interviewCount =
-    document.getElementById(
-        "interviewCount"
-    );
+    document.getElementById("interviewCount");
 
 const selectedCount =
-    document.getElementById(
-        "selectedCount"
-    );
+    document.getElementById("selectedCount");
 
 const rejectedCount =
-    document.getElementById(
-        "rejectedCount"
-    );
+    document.getElementById("rejectedCount");
 
 const submitBtn =
-    document.getElementById(
-        "submitBtn"
-    );
+    document.getElementById("submitBtn");
 
 const cancelBtn =
-    document.getElementById(
-        "cancelBtn"
-    );
+    document.getElementById("cancelBtn");
 
 const formTitle =
-    document.getElementById(
-        "formTitle"
-    );
+    document.getElementById("formTitle");
 
 const themeToggle =
-    document.getElementById(
-        "themeToggle"
-    );
+    document.getElementById("themeToggle");
 
 const exportBtn =
-    document.getElementById(
-        "exportBtn"
-    );
-
-
-/* =========================
-   CHART ELEMENTS
-========================= */
-
-const appliedBar =
-    document.getElementById(
-        "appliedBar"
-    );
-
-const interviewBar =
-    document.getElementById(
-        "interviewBar"
-    );
-
-const selectedBar =
-    document.getElementById(
-        "selectedBar"
-    );
-
-const rejectedBar =
-    document.getElementById(
-        "rejectedBar"
-    );
-
-const chartAppliedValue =
-    document.getElementById(
-        "chartAppliedValue"
-    );
-
-const chartInterviewValue =
-    document.getElementById(
-        "chartInterviewValue"
-    );
-
-const chartSelectedValue =
-    document.getElementById(
-        "chartSelectedValue"
-    );
-
-const chartRejectedValue =
-    document.getElementById(
-        "chartRejectedValue"
-    );
+    document.getElementById("exportBtn");
 
 const successRate =
-    document.getElementById(
-        "successRate"
-    );
+    document.getElementById("successRate");
 
+const appliedBar =
+    document.getElementById("appliedBar");
 
-/* =========================
-   APPLICATION DATA
-========================= */
+const interviewBar =
+    document.getElementById("interviewBar");
+
+const selectedBar =
+    document.getElementById("selectedBar");
+
+const rejectedBar =
+    document.getElementById("rejectedBar");
+
+const chartAppliedValue =
+    document.getElementById("chartAppliedValue");
+
+const chartInterviewValue =
+    document.getElementById("chartInterviewValue");
+
+const chartSelectedValue =
+    document.getElementById("chartSelectedValue");
+
+const chartRejectedValue =
+    document.getElementById("chartRejectedValue");
+
+const upcomingInterviews =
+    document.getElementById("upcomingInterviews");
+
+const interviewReminderCount =
+    document.getElementById("interviewReminderCount");
+
 
 let applications =
     JSON.parse(
@@ -168,9 +115,7 @@ let applications =
 let editingId = null;
 
 
-/* =========================
-   ADD / UPDATE APPLICATION
-========================= */
+/* ADD / UPDATE */
 
 jobForm.addEventListener(
     "submit",
@@ -179,7 +124,7 @@ jobForm.addEventListener(
         event.preventDefault();
 
 
-        const applicationData = {
+        const data = {
 
             company:
                 companyInput.value.trim(),
@@ -213,28 +158,22 @@ jobForm.addEventListener(
 
         if (editingId !== null) {
 
-
             applications =
                 applications.map(
-                    application => {
+                    item => {
 
                         if (
-                            application.id ===
-                            editingId
+                            item.id === editingId
                         ) {
 
                             return {
-
-                                ...application,
-
-                                ...applicationData
-
+                                ...item,
+                                ...data
                             };
 
                         }
 
-
-                        return application;
+                        return item;
 
                     }
                 );
@@ -247,19 +186,13 @@ jobForm.addEventListener(
 
         } else {
 
-
-            const newApplication = {
+            applications.push({
 
                 id: Date.now(),
 
-                ...applicationData
+                ...data
 
-            };
-
-
-            applications.push(
-                newApplication
-            );
+            });
 
 
             alert(
@@ -273,309 +206,269 @@ jobForm.addEventListener(
 
         renderApplications();
 
+        renderUpcomingInterviews();
+
         resetForm();
 
     }
 );
 
 
-/* =========================
-   SAVE DATA
-========================= */
+/* SAVE */
 
 function saveApplications() {
 
     localStorage.setItem(
         "jobApplications",
-        JSON.stringify(
-            applications
-        )
+        JSON.stringify(applications)
     );
 
 }
 
 
-/* =========================
-   RENDER APPLICATIONS
-========================= */
+/* RENDER */
 
 function renderApplications() {
 
-    const searchText =
+    const search =
         searchInput.value
             .trim()
             .toLowerCase();
 
 
-    const selectedFilter =
+    const filter =
         filterStatus.value;
 
 
-    const filteredApplications =
+    const filtered =
         applications.filter(
-            application => {
+            item => {
 
+                const searchMatch =
 
-                const matchesSearch =
-
-                    application.company
+                    item.company
                         .toLowerCase()
-                        .includes(
-                            searchText
-                        )
+                        .includes(search)
 
                     ||
 
-                    application.role
+                    item.role
                         .toLowerCase()
-                        .includes(
-                            searchText
-                        )
+                        .includes(search)
 
                     ||
 
-                    application.location
+                    item.location
                         .toLowerCase()
-                        .includes(
-                            searchText
-                        );
+                        .includes(search);
 
 
-                const matchesStatus =
+                const statusMatch =
 
-                    selectedFilter ===
-                    "All"
+                    filter === "All"
 
                     ||
 
-                    application.status ===
-                    selectedFilter;
+                    item.status === filter;
 
 
                 return (
-                    matchesSearch &&
-                    matchesStatus
+                    searchMatch &&
+                    statusMatch
                 );
 
             }
         );
 
 
-    applicationsList.innerHTML =
-        "";
+    applicationsList.innerHTML = "";
 
 
-    if (
-        filteredApplications.length ===
-        0
-    ) {
-
+    if (filtered.length === 0) {
 
         emptyMessage.style.display =
             "block";
 
-
     } else {
-
 
         emptyMessage.style.display =
             "none";
 
 
-        filteredApplications.forEach(
-            application => {
+        filtered.forEach(item => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
 
 
-                const card =
-                    document.createElement(
-                        "div"
-                    );
+            card.className =
+                "application-card";
 
 
-                card.className =
-                    "application-card";
+            card.innerHTML = `
+
+                <div class="card-top">
+
+                    <div>
+
+                        <h3 class="company-name">
+
+                            ${escapeHTML(
+                                item.company
+                            )}
+
+                        </h3>
 
 
-                card.innerHTML = `
+                        <p class="role">
 
-                    <div class="card-top">
+                            ${escapeHTML(
+                                item.role
+                            )}
 
-                        <div>
-
-                            <h3 class="company-name">
-
-                                ${escapeHTML(
-                                    application.company
-                                )}
-
-                            </h3>
+                        </p>
 
 
-                            <p class="role">
+                        <span
+                            class="status status-${item.status}"
+                        >
 
-                                ${escapeHTML(
-                                    application.role
-                                )}
+                            ${item.status}
 
-                            </p>
+                        </span>
 
 
-                            <span
-                                class="status status-${application.status}"
-                            >
+                        <div class="details">
 
-                                ${application.status}
-
+                            <span>
+                                📅 Applied:
+                                ${formatDate(item.date)}
                             </span>
 
 
-                            <div class="details">
+                            ${
+                                item.interviewDate
+                                ? `
+                                    <span>
+                                        🎯 Interview:
+                                        ${formatDate(
+                                            item.interviewDate
+                                        )}
+                                    </span>
+                                `
+                                : ""
+                            }
 
 
-                                <span>
+                            ${
+                                item.salary
+                                ? `
+                                    <span>
+                                        💰
+                                        ${escapeHTML(
+                                            item.salary
+                                        )}
+                                    </span>
+                                `
+                                : ""
+                            }
 
-                                    📅 Applied:
 
-                                    ${formatDate(
-                                        application.date
+                            ${
+                                item.location
+                                ? `
+                                    <span>
+                                        📍
+                                        ${escapeHTML(
+                                            item.location
+                                        )}
+                                    </span>
+                                `
+                                : ""
+                            }
+
+                        </div>
+
+
+                        ${
+                            item.notes
+                            ? `
+                                <div class="notes">
+
+                                    📝
+                                    ${escapeHTML(
+                                        item.notes
                                     )}
 
-                                </span>
+                                </div>
+                            `
+                            : ""
+                        }
+
+                    </div>
 
 
-                                ${
-                                    application.interviewDate
-                                    ? `
-                                        <span>
-
-                                            🎯 Interview:
-
-                                            ${formatDate(
-                                                application.interviewDate
-                                            )}
-
-                                        </span>
-                                    `
-                                    : ""
-                                }
+                    <div class="card-actions">
 
 
-                                ${
-                                    application.salary
-                                    ? `
-                                        <span>
+                        ${
+                            item.link
+                            ? `
+                                <button
+                                    class="view-btn"
+                                    onclick="openJobLink(
+                                        '${encodeURIComponent(
+                                            item.link
+                                        )}'
+                                    "
+                                >
 
-                                            💰
+                                    View
 
-                                            ${escapeHTML(
-                                                application.salary
-                                            )}
-
-                                        </span>
-                                    `
-                                    : ""
-                                }
-
-
-                                ${
-                                    application.location
-                                    ? `
-                                        <span>
-
-                                            📍
-
-                                            ${escapeHTML(
-                                                application.location
-                                            )}
-
-                                        </span>
-                                    `
-                                    : ""
-                                }
+                                </button>
+                            `
+                            : ""
+                        }
 
 
-                            </div>
+                        <button
+                            class="edit-btn"
+                            onclick="editApplication(
+                                ${item.id}
+                            )"
+                        >
+
+                            Edit
+
+                        </button>
 
 
-                            ${
-                                application.notes
-                                ? `
-                                    <div class="notes">
+                        <button
+                            class="delete-btn"
+                            onclick="deleteApplication(
+                                ${item.id}
+                            )"
+                        >
 
-                                        📝
+                            Delete
 
-                                        ${escapeHTML(
-                                            application.notes
-                                        )}
-
-                                    </div>
-                                `
-                                : ""
-                            }
-
-
-                        </div>
-
-
-                        <div class="card-actions">
-
-
-                            ${
-                                application.link
-                                ? `
-                                    <button
-                                        class="view-btn"
-                                        onclick="openJobLink('${encodeURIComponent(
-                                            application.link
-                                        )}')"
-                                    >
-
-                                        View
-
-                                    </button>
-                                `
-                                : ""
-                            }
-
-
-                            <button
-                                class="edit-btn"
-                                onclick="editApplication(
-                                    ${application.id}
-                                )"
-                            >
-
-                                Edit
-
-                            </button>
-
-
-                            <button
-                                class="delete-btn"
-                                onclick="deleteApplication(
-                                    ${application.id}
-                                )"
-                            >
-
-                                Delete
-
-                            </button>
-
-
-                        </div>
+                        </button>
 
 
                     </div>
 
-                `;
+                </div>
+
+            `;
 
 
-                applicationsList.appendChild(
-                    card
-                );
+            applicationsList.appendChild(
+                card
+            );
 
-            }
-        );
+        });
 
     }
 
@@ -585,56 +478,151 @@ function renderApplications() {
 }
 
 
-/* =========================
-   EDIT
-========================= */
+/* DASHBOARD */
 
-function editApplication(id) {
+function updateDashboard() {
+
+    const total =
+        applications.length;
 
 
-    const application =
-        applications.find(
+    const applied =
+        applications.filter(
             item =>
-                item.id === id
+                item.status === "Applied"
+        ).length;
+
+
+    const interviews =
+        applications.filter(
+            item =>
+                item.status === "Interview"
+        ).length;
+
+
+    const selected =
+        applications.filter(
+            item =>
+                item.status === "Selected"
+        ).length;
+
+
+    const rejected =
+        applications.filter(
+            item =>
+                item.status === "Rejected"
+        ).length;
+
+
+    totalApplications.textContent =
+        total;
+
+    appliedCount.textContent =
+        applied;
+
+    interviewCount.textContent =
+        interviews;
+
+    selectedCount.textContent =
+        selected;
+
+    rejectedCount.textContent =
+        rejected;
+
+
+    chartAppliedValue.textContent =
+        applied;
+
+    chartInterviewValue.textContent =
+        interviews;
+
+    chartSelectedValue.textContent =
+        selected;
+
+    chartRejectedValue.textContent =
+        rejected;
+
+
+    const max =
+        Math.max(
+            applied,
+            interviews,
+            selected,
+            rejected,
+            1
         );
 
 
-    if (!application) {
+    appliedBar.style.height =
+        `${(applied / max) * 200}px`;
 
-        return;
+    interviewBar.style.height =
+        `${(interviews / max) * 200}px`;
 
-    }
+    selectedBar.style.height =
+        `${(selected / max) * 200}px`;
+
+    rejectedBar.style.height =
+        `${(rejected / max) * 200}px`;
+
+
+    const rate =
+        total === 0
+        ? 0
+        : Math.round(
+            (selected / total) * 100
+        );
+
+
+    successRate.textContent =
+        `${rate}%`;
+
+}
+
+
+/* EDIT */
+
+function editApplication(id) {
+
+    const item =
+        applications.find(
+            application =>
+                application.id === id
+        );
+
+
+    if (!item) return;
 
 
     editingId = id;
 
 
     companyInput.value =
-        application.company;
+        item.company;
 
     roleInput.value =
-        application.role;
+        item.role;
 
     dateInput.value =
-        application.date;
+        item.date;
 
     interviewDateInput.value =
-        application.interviewDate || "";
+        item.interviewDate || "";
 
     salaryInput.value =
-        application.salary || "";
+        item.salary || "";
 
     locationInput.value =
-        application.location || "";
+        item.location || "";
 
     statusInput.value =
-        application.status;
+        item.status;
 
     jobLinkInput.value =
-        application.link || "";
+        item.link || "";
 
     notesInput.value =
-        application.notes || "";
+        item.notes || "";
 
 
     formTitle.textContent =
@@ -658,9 +646,7 @@ function editApplication(id) {
 }
 
 
-/* =========================
-   RESET FORM
-========================= */
+/* RESET */
 
 cancelBtn.addEventListener(
     "click",
@@ -686,20 +672,15 @@ function resetForm() {
 }
 
 
-/* =========================
-   DELETE
-========================= */
+/* DELETE */
 
 function deleteApplication(id) {
 
-
-    const confirmed =
-        confirm(
+    if (
+        !confirm(
             "Are you sure you want to delete this application?"
-        );
-
-
-    if (!confirmed) {
+        )
+    ) {
 
         return;
 
@@ -708,8 +689,8 @@ function deleteApplication(id) {
 
     applications =
         applications.filter(
-            application =>
-                application.id !== id
+            item =>
+                item.id !== id
         );
 
 
@@ -717,17 +698,14 @@ function deleteApplication(id) {
 
     renderApplications();
 
+    renderUpcomingInterviews();
+
 }
 
 
-/* =========================
-   OPEN JOB LINK
-========================= */
+/* JOB LINK */
 
-function openJobLink(
-    encodedLink
-) {
-
+function openJobLink(encodedLink) {
 
     const link =
         decodeURIComponent(
@@ -737,19 +715,15 @@ function openJobLink(
 
     window.open(
         link,
-        "_blank",
-        "noopener,noreferrer"
+        "_blank"
     );
 
 }
 
 
-/* =========================
-   FORMAT DATE
-========================= */
+/* DATE */
 
 function formatDate(date) {
-
 
     if (!date) {
 
@@ -758,173 +732,21 @@ function formatDate(date) {
     }
 
 
-    const formattedDate =
-        new Date(date);
-
-
-    return formattedDate.toLocaleDateString(
+    return new Date(
+        date
+    ).toLocaleDateString(
         "en-IN",
         {
-
             day: "2-digit",
-
             month: "short",
-
             year: "numeric"
-
         }
     );
 
 }
 
 
-/* =========================
-   DASHBOARD
-========================= */
-
-function updateDashboard() {
-
-
-    const total =
-        applications.length;
-
-
-    const applied =
-        applications.filter(
-            application =>
-                application.status ===
-                "Applied"
-        ).length;
-
-
-    const interviews =
-        applications.filter(
-            application =>
-                application.status ===
-                "Interview"
-        ).length;
-
-
-    const selected =
-        applications.filter(
-            application =>
-                application.status ===
-                "Selected"
-        ).length;
-
-
-    const rejected =
-        applications.filter(
-            application =>
-                application.status ===
-                "Rejected"
-        ).length;
-
-
-    totalApplications.textContent =
-        total;
-
-    appliedCount.textContent =
-        applied;
-
-    interviewCount.textContent =
-        interviews;
-
-    selectedCount.textContent =
-        selected;
-
-    rejectedCount.textContent =
-        rejected;
-
-
-    updateChart(
-        applied,
-        interviews,
-        selected,
-        rejected,
-        total
-    );
-
-}
-
-
-/* =========================
-   UPDATE CHART
-========================= */
-
-function updateChart(
-    applied,
-    interviews,
-    selected,
-    rejected,
-    total
-) {
-
-
-    const maxValue =
-        Math.max(
-            applied,
-            interviews,
-            selected,
-            rejected,
-            1
-        );
-
-
-    const maxHeight = 200;
-
-
-    appliedBar.style.height =
-        `${(applied / maxValue) * maxHeight}px`;
-
-
-    interviewBar.style.height =
-        `${(interviews / maxValue) * maxHeight}px`;
-
-
-    selectedBar.style.height =
-        `${(selected / maxValue) * maxHeight}px`;
-
-
-    rejectedBar.style.height =
-        `${(rejected / maxValue) * maxHeight}px`;
-
-
-    chartAppliedValue.textContent =
-        applied;
-
-    chartInterviewValue.textContent =
-        interviews;
-
-    chartSelectedValue.textContent =
-        selected;
-
-    chartRejectedValue.textContent =
-        rejected;
-
-
-    let rate = 0;
-
-
-    if (total > 0) {
-
-        rate =
-            Math.round(
-                (selected / total) * 100
-            );
-
-    }
-
-
-    successRate.textContent =
-        `${rate}%`;
-
-}
-
-
-/* =========================
-   SEARCH
-========================= */
+/* SEARCH */
 
 searchInput.addEventListener(
     "input",
@@ -932,9 +754,7 @@ searchInput.addEventListener(
 );
 
 
-/* =========================
-   FILTER
-========================= */
+/* FILTER */
 
 filterStatus.addEventListener(
     "change",
@@ -942,9 +762,7 @@ filterStatus.addEventListener(
 );
 
 
-/* =========================
-   EXPORT CSV
-========================= */
+/* CSV EXPORT */
 
 exportBtn.addEventListener(
     "click",
@@ -953,7 +771,6 @@ exportBtn.addEventListener(
 
 
 function exportToCSV() {
-
 
     if (applications.length === 0) {
 
@@ -991,31 +808,31 @@ function exportToCSV() {
 
     const rows =
         applications.map(
-            application => [
+            item => [
 
-                application.company,
+                item.company,
 
-                application.role,
+                item.role,
 
-                application.date,
+                item.date,
 
-                application.interviewDate || "",
+                item.interviewDate || "",
 
-                application.salary || "",
+                item.salary || "",
 
-                application.location || "",
+                item.location || "",
 
-                application.status,
+                item.status,
 
-                application.link || "",
+                item.link || "",
 
-                application.notes || ""
+                item.notes || ""
 
             ]
         );
 
 
-    const csvContent = [
+    const csv = [
 
         headers,
 
@@ -1043,8 +860,7 @@ function exportToCSV() {
     const blob =
         new Blob(
             [
-                "\uFEFF" +
-                csvContent
+                "\uFEFF" + csv
             ],
             {
                 type:
@@ -1054,46 +870,29 @@ function exportToCSV() {
 
 
     const url =
-        URL.createObjectURL(
-            blob
-        );
+        URL.createObjectURL(blob);
 
 
     const link =
-        document.createElement(
-            "a"
-        );
+        document.createElement("a");
 
 
     link.href = url;
 
 
-    const today =
-        new Date()
-            .toISOString()
-            .split("T")[0];
-
-
     link.download =
-        `JobTrack-Applications-${today}.csv`;
+        `JobTrack-Applications-${new Date()
+            .toISOString()
+            .split("T")[0]}.csv`;
 
 
-    document.body.appendChild(
-        link
-    );
-
+    document.body.appendChild(link);
 
     link.click();
 
+    document.body.removeChild(link);
 
-    document.body.removeChild(
-        link
-    );
-
-
-    URL.revokeObjectURL(
-        url
-    );
+    URL.revokeObjectURL(url);
 
 
     alert(
@@ -1103,17 +902,206 @@ function exportToCSV() {
 }
 
 
-/* =========================
-   HTML SECURITY
-========================= */
+/* INTERVIEW REMINDER */
+
+function renderUpcomingInterviews() {
+
+    const today =
+        new Date();
+
+
+    today.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    const upcoming =
+        applications
+
+            .filter(
+                item =>
+                    item.interviewDate
+            )
+
+            .filter(item => {
+
+                const date =
+                    new Date(
+                        item.interviewDate
+                    );
+
+
+                date.setHours(
+                    0,
+                    0,
+                    0,
+                    0
+                );
+
+
+                return date >= today;
+
+            })
+
+            .sort(
+                (a, b) =>
+                    new Date(
+                        a.interviewDate
+                    ) -
+                    new Date(
+                        b.interviewDate
+                    )
+            );
+
+
+    interviewReminderCount.textContent =
+        `${upcoming.length} Upcoming`;
+
+
+    upcomingInterviews.innerHTML = "";
+
+
+    if (upcoming.length === 0) {
+
+        upcomingInterviews.innerHTML = `
+
+            <div class="no-interviews">
+
+                🎉 No upcoming interviews
+
+                <br>
+
+                <small>
+                    Add an interview date to see it here.
+                </small>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    upcoming.forEach(item => {
+
+        const interviewDate =
+            new Date(
+                item.interviewDate
+            );
+
+
+        const difference =
+            Math.ceil(
+                (
+                    interviewDate - today
+                ) /
+                (
+                    1000 *
+                    60 *
+                    60 *
+                    24
+                )
+            );
+
+
+        let dayText;
+
+
+        if (difference === 0) {
+
+            dayText = "🔥 Today";
+
+        } else if (
+            difference === 1
+        ) {
+
+            dayText = "⚡ Tomorrow";
+
+        } else {
+
+            dayText =
+                `📆 In ${difference} days`;
+
+        }
+
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className =
+            "interview-card";
+
+
+        card.innerHTML = `
+
+            <div>
+
+                <div class="interview-company">
+
+                    🏢
+                    ${escapeHTML(
+                        item.company
+                    )}
+
+                </div>
+
+
+                <div class="interview-role">
+
+                    ${escapeHTML(
+                        item.role
+                    )}
+
+                </div>
+
+            </div>
+
+
+            <div class="interview-date">
+
+                <strong>
+
+                    ${dayText}
+
+                </strong>
+
+
+                <span>
+
+                    ${formatDate(
+                        item.interviewDate
+                    )}
+
+                </span>
+
+            </div>
+
+        `;
+
+
+        upcomingInterviews.appendChild(
+            card
+        );
+
+    });
+
+}
+
+
+/* SECURITY */
 
 function escapeHTML(text) {
 
-
     const div =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     div.textContent =
@@ -1125,9 +1113,7 @@ function escapeHTML(text) {
 }
 
 
-/* =========================
-   DARK / LIGHT MODE
-========================= */
+/* DARK / LIGHT MODE */
 
 const savedTheme =
     localStorage.getItem(
@@ -1139,18 +1125,14 @@ if (
     savedTheme === "light"
 ) {
 
-
     document.body.classList.add(
         "light-mode"
     );
 
-
     themeToggle.textContent =
         "🌙 Dark Mode";
 
-
 } else {
-
 
     themeToggle.textContent =
         "☀️ Light Mode";
@@ -1162,37 +1144,31 @@ themeToggle.addEventListener(
     "click",
     function () {
 
-
         document.body.classList.toggle(
             "light-mode"
         );
 
 
-        const isLight =
+        const light =
             document.body.classList.contains(
                 "light-mode"
             );
 
 
-        if (isLight) {
-
+        if (light) {
 
             themeToggle.textContent =
                 "🌙 Dark Mode";
-
 
             localStorage.setItem(
                 "jobTrackTheme",
                 "light"
             );
 
-
         } else {
-
 
             themeToggle.textContent =
                 "☀️ Light Mode";
-
 
             localStorage.setItem(
                 "jobTrackTheme",
@@ -1205,8 +1181,8 @@ themeToggle.addEventListener(
 );
 
 
-/* =========================
-   INITIAL LOAD
-========================= */
+/* INITIAL LOAD */
 
 renderApplications();
+
+renderUpcomingInterviews();

@@ -5,17 +5,11 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>JobTrack - Job Application Tracker</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -29,17 +23,12 @@
 
         <h1>JobTrack</h1>
 
-        <p>
-            Track your career journey
-        </p>
+        <p>Track your career journey</p>
 
     </div>
 
 
-    <button
-        id="themeToggle"
-        class="theme-btn"
-    >
+    <button id="themeToggle" class="theme-btn">
         ☀️ Light Mode
     </button>
 
@@ -50,18 +39,44 @@
 <main class="container">
 
 
-    <!-- =========================
-         DASHBOARD
-    ========================== -->
+    <!-- INTERVIEW REMINDER -->
+
+    <section class="interview-section">
+
+        <div class="interview-header">
+
+            <div>
+
+                <h2>📅 Upcoming Interviews</h2>
+
+                <p>Keep track of your upcoming interviews</p>
+
+            </div>
+
+            <span id="interviewReminderCount">
+                0 Upcoming
+            </span>
+
+        </div>
+
+
+        <div
+            id="upcomingInterviews"
+            class="upcoming-list"
+        ></div>
+
+    </section>
+
+
+
+    <!-- DASHBOARD -->
 
     <section class="dashboard">
 
 
         <div class="stat-card">
 
-            <span>
-                Total Applications
-            </span>
+            <span>Total Applications</span>
 
             <strong id="totalApplications">
                 0
@@ -70,12 +85,9 @@
         </div>
 
 
-
         <div class="stat-card">
 
-            <span>
-                Applied
-            </span>
+            <span>Applied</span>
 
             <strong id="appliedCount">
                 0
@@ -84,12 +96,9 @@
         </div>
 
 
-
         <div class="stat-card">
 
-            <span>
-                Interviews
-            </span>
+            <span>Interviews</span>
 
             <strong id="interviewCount">
                 0
@@ -98,12 +107,9 @@
         </div>
 
 
-
         <div class="stat-card">
 
-            <span>
-                Selected
-            </span>
+            <span>Selected</span>
 
             <strong id="selectedCount">
                 0
@@ -112,12 +118,9 @@
         </div>
 
 
-
         <div class="stat-card">
 
-            <span>
-                Rejected
-            </span>
+            <span>Rejected</span>
 
             <strong id="rejectedCount">
                 0
@@ -130,34 +133,25 @@
 
 
 
-    <!-- =========================
-         ANALYTICS
-    ========================== -->
+    <!-- ANALYTICS -->
 
     <section class="analytics-section">
 
 
         <div class="analytics-header">
 
-
             <div>
 
-                <h2>
-                    Application Analytics
-                </h2>
+                <h2>Application Analytics</h2>
 
-                <p>
-                    Track your application progress
-                </p>
+                <p>Track your application progress</p>
 
             </div>
 
 
             <div class="success-rate">
 
-                <span>
-                    Success Rate
-                </span>
+                <span>Success Rate</span>
 
                 <strong id="successRate">
                     0%
@@ -165,13 +159,11 @@
 
             </div>
 
-
         </div>
 
 
 
         <div class="chart-container">
-
 
             <div class="bar-chart">
 
@@ -186,12 +178,10 @@
 
                     </div>
 
-
                     <div
                         class="bar applied-bar"
                         id="appliedBar"
                     ></div>
-
 
                     <span class="chart-label">
                         Applied
@@ -211,12 +201,10 @@
 
                     </div>
 
-
                     <div
                         class="bar interview-bar"
                         id="interviewBar"
                     ></div>
-
 
                     <span class="chart-label">
                         Interview
@@ -236,12 +224,10 @@
 
                     </div>
 
-
                     <div
                         class="bar selected-bar"
                         id="selectedBar"
                     ></div>
-
 
                     <span class="chart-label">
                         Selected
@@ -261,12 +247,10 @@
 
                     </div>
 
-
                     <div
                         class="bar rejected-bar"
                         id="rejectedBar"
                     ></div>
-
 
                     <span class="chart-label">
                         Rejected
@@ -284,9 +268,7 @@
 
 
 
-    <!-- =========================
-         ADD APPLICATION
-    ========================== -->
+    <!-- ADD / EDIT FORM -->
 
     <section class="form-section">
 
@@ -294,7 +276,6 @@
         <h2 id="formTitle">
             Add Job Application
         </h2>
-
 
 
         <form id="jobForm">
@@ -305,9 +286,7 @@
 
                 <div class="input-group">
 
-                    <label>
-                        Company Name *
-                    </label>
+                    <label>Company Name *</label>
 
                     <input
                         type="text"
@@ -322,9 +301,7 @@
 
                 <div class="input-group">
 
-                    <label>
-                        Job Role *
-                    </label>
+                    <label>Job Role *</label>
 
                     <input
                         type="text"
@@ -339,9 +316,7 @@
 
                 <div class="input-group">
 
-                    <label>
-                        Applied Date *
-                    </label>
+                    <label>Applied Date *</label>
 
                     <input
                         type="date"
@@ -355,9 +330,7 @@
 
                 <div class="input-group">
 
-                    <label>
-                        Interview Date
-                    </label>
+                    <label>Interview Date</label>
 
                     <input
                         type="date"
@@ -370,9 +343,7 @@
 
                 <div class="input-group">
 
-                    <label>
-                        Salary
-                    </label>
+                    <label>Salary</label>
 
                     <input
                         type="text"
@@ -386,14 +357,12 @@
 
                 <div class="input-group">
 
-                    <label>
-                        Location
-                    </label>
+                    <label>Location</label>
 
                     <input
                         type="text"
                         id="location"
-                        placeholder="Example: Chennai / Remote"
+                        placeholder="Chennai / Remote"
                     >
 
                 </div>
@@ -402,10 +371,7 @@
 
                 <div class="input-group">
 
-                    <label>
-                        Status
-                    </label>
-
+                    <label>Status</label>
 
                     <select id="status">
 
@@ -433,9 +399,7 @@
 
                 <div class="input-group">
 
-                    <label>
-                        Job Link
-                    </label>
+                    <label>Job Link</label>
 
                     <input
                         type="url"
@@ -452,9 +416,7 @@
 
             <div class="input-group notes-group">
 
-                <label>
-                    Notes
-                </label>
+                <label>Notes</label>
 
                 <textarea
                     id="notes"
@@ -467,7 +429,6 @@
 
             <div class="form-buttons">
 
-
                 <button
                     type="submit"
                     class="primary-btn"
@@ -477,16 +438,13 @@
                 </button>
 
 
-
                 <button
                     type="button"
                     class="cancel-btn"
                     id="cancelBtn"
-                    style="display: none;"
                 >
                     Cancel Edit
                 </button>
-
 
             </div>
 
@@ -498,9 +456,7 @@
 
 
 
-    <!-- =========================
-         APPLICATIONS
-    ========================== -->
+    <!-- APPLICATION LIST -->
 
     <section class="applications-section">
 
@@ -510,9 +466,7 @@
 
             <div>
 
-                <h2>
-                    My Applications
-                </h2>
+                <h2>My Applications</h2>
 
                 <p>
                     Manage all your job applications
@@ -533,7 +487,6 @@
                         id="searchInput"
                         placeholder="Search company or role..."
                     >
-
 
 
                     <select id="filterStatus">
@@ -583,15 +536,12 @@
         <div id="applicationsList"></div>
 
 
-
         <div
             id="emptyMessage"
             class="empty-message"
         >
 
-            <h3>
-                No applications found
-            </h3>
+            <h3>No applications found</h3>
 
             <p>
                 Add a job application to get started.
@@ -619,7 +569,6 @@
 
 
 <script src="script.js"></script>
-
 
 </body>
 

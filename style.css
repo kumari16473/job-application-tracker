@@ -19,16 +19,10 @@ body {
 
     min-height: 100vh;
 
-    transition:
-        background 0.3s,
-        color 0.3s;
+    transition: 0.3s;
 
 }
 
-
-/* =========================
-   HEADER
-========================= */
 
 .header {
 
@@ -43,8 +37,6 @@ body {
     justify-content: space-between;
 
     align-items: center;
-
-    gap: 20px;
 
 }
 
@@ -67,15 +59,11 @@ body {
 }
 
 
-/* =========================
-   THEME BUTTON
-========================= */
-
 .theme-btn {
 
     background: #252b38;
 
-    color: #ffffff;
+    color: white;
 
     border: 1px solid #3b4353;
 
@@ -87,23 +75,8 @@ body {
 
     font-weight: bold;
 
-    transition: 0.3s;
-
 }
 
-
-.theme-btn:hover {
-
-    border-color: #6c63ff;
-
-    transform: translateY(-2px);
-
-}
-
-
-/* =========================
-   CONTAINER
-========================= */
 
 .container {
 
@@ -116,16 +89,159 @@ body {
 }
 
 
-/* =========================
-   DASHBOARD
-========================= */
+/* INTERVIEW */
+
+.interview-section {
+
+    background: #171b24;
+
+    border: 1px solid #292e3a;
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.interview-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.interview-header p {
+
+    color: #9ca3af;
+
+    margin-top: 6px;
+
+}
+
+
+#interviewReminderCount {
+
+    background: #40351e;
+
+    color: #fbbf24;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
+
+
+.upcoming-list {
+
+    display: grid;
+
+    gap: 12px;
+
+}
+
+
+.interview-card {
+
+    background: #10131a;
+
+    border: 1px solid #303644;
+
+    border-left: 4px solid #fbbf24;
+
+    border-radius: 10px;
+
+    padding: 16px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.interview-company {
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+
+}
+
+
+.interview-role {
+
+    color: #9ca3af;
+
+}
+
+
+.interview-date {
+
+    text-align: right;
+
+}
+
+
+.interview-date strong {
+
+    display: block;
+
+    color: #fbbf24;
+
+    margin-bottom: 4px;
+
+}
+
+
+.interview-date span {
+
+    color: #9ca3af;
+
+    font-size: 13px;
+
+}
+
+
+.no-interviews {
+
+    text-align: center;
+
+    padding: 25px;
+
+    color: #9ca3af;
+
+    background: #10131a;
+
+    border-radius: 10px;
+
+}
+
+
+/* DASHBOARD */
 
 .dashboard {
 
     display: grid;
 
-    grid-template-columns:
-        repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 
     gap: 18px;
 
@@ -178,9 +294,7 @@ body {
 }
 
 
-/* =========================
-   ANALYTICS
-========================= */
+/* ANALYTICS */
 
 .analytics-section {
 
@@ -210,16 +324,11 @@ body {
 }
 
 
-.analytics-header h2 {
-
-    margin-bottom: 7px;
-
-}
-
-
 .analytics-header p {
 
     color: #9ca3af;
+
+    margin-top: 6px;
 
 }
 
@@ -237,8 +346,6 @@ body {
 
     color: #9ca3af;
 
-    font-size: 14px;
-
 }
 
 
@@ -254,10 +361,6 @@ body {
 
 }
 
-
-/* =========================
-   CHART
-========================= */
 
 .chart-container {
 
@@ -314,7 +417,7 @@ body {
 
     border-radius: 8px 8px 0 0;
 
-    transition: height 0.5s ease;
+    transition: height 0.5s;
 
 }
 
@@ -369,9 +472,7 @@ body {
 }
 
 
-/* =========================
-   SECTIONS
-========================= */
+/* FORM */
 
 .form-section,
 .applications-section {
@@ -389,31 +490,11 @@ body {
 }
 
 
-.form-section h2,
-.applications-section h2 {
-
-    margin-bottom: 8px;
-
-}
-
-
-.applications-section > .section-header p {
-
-    color: #9ca3af;
-
-}
-
-
-/* =========================
-   FORM
-========================= */
-
 .form-grid {
 
     display: grid;
 
-    grid-template-columns:
-        repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 
     gap: 20px;
 
@@ -490,10 +571,6 @@ textarea {
 }
 
 
-/* =========================
-   FORM BUTTONS
-========================= */
-
 .form-buttons {
 
     display: flex;
@@ -516,8 +593,6 @@ textarea {
 
     cursor: pointer;
 
-    font-size: 15px;
-
     font-weight: bold;
 
 }
@@ -532,25 +607,18 @@ textarea {
 }
 
 
-.primary-btn:hover {
-
-    background: #574fe0;
-
-}
-
-
 .cancel-btn {
 
     background: #303644;
 
     color: white;
 
+    display: none;
+
 }
 
 
-/* =========================
-   APPLICATION HEADER
-========================= */
+/* APPLICATION HEADER */
 
 .section-header {
 
@@ -567,11 +635,18 @@ textarea {
 }
 
 
+.section-header p {
+
+    color: #9ca3af;
+
+    margin-top: 6px;
+
+}
+
+
 .section-actions {
 
     display: flex;
-
-    align-items: center;
 
     gap: 12px;
 
@@ -594,15 +669,13 @@ textarea {
 }
 
 
-/* =========================
-   EXPORT BUTTON
-========================= */
+/* EXPORT */
 
 .export-btn {
 
     background: #16845a;
 
-    color: #ffffff;
+    color: white;
 
     border: none;
 
@@ -614,25 +687,10 @@ textarea {
 
     font-weight: bold;
 
-    white-space: nowrap;
-
-    transition: 0.3s;
-
 }
 
 
-.export-btn:hover {
-
-    transform: translateY(-2px);
-
-    opacity: 0.9;
-
-}
-
-
-/* =========================
-   APPLICATION CARD
-========================= */
+/* APPLICATION CARD */
 
 .application-card {
 
@@ -758,14 +816,8 @@ textarea {
 
     color: #cbd5e1;
 
-    line-height: 1.5;
-
 }
 
-
-/* =========================
-   CARD BUTTONS
-========================= */
 
 .card-actions {
 
@@ -820,17 +872,6 @@ textarea {
 }
 
 
-.card-actions button:hover {
-
-    opacity: 0.8;
-
-}
-
-
-/* =========================
-   EMPTY MESSAGE
-========================= */
-
 .empty-message {
 
     text-align: center;
@@ -851,9 +892,7 @@ textarea {
 }
 
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer {
 
@@ -868,9 +907,7 @@ footer {
 }
 
 
-/* =========================
-   LIGHT MODE
-========================= */
+/* LIGHT MODE */
 
 body.light-mode {
 
@@ -883,27 +920,9 @@ body.light-mode {
 
 body.light-mode .header {
 
-    background: #ffffff;
+    background: white;
 
     border-color: #e5e7eb;
-
-}
-
-
-body.light-mode .header p {
-
-    color: #6b7280;
-
-}
-
-
-body.light-mode .theme-btn {
-
-    background: #f3f4f6;
-
-    color: #111827;
-
-    border-color: #d1d5db;
 
 }
 
@@ -911,18 +930,12 @@ body.light-mode .theme-btn {
 body.light-mode .stat-card,
 body.light-mode .analytics-section,
 body.light-mode .form-section,
-body.light-mode .applications-section {
+body.light-mode .applications-section,
+body.light-mode .interview-section {
 
-    background: #ffffff;
+    background: white;
 
     border-color: #e5e7eb;
-
-}
-
-
-body.light-mode .stat-card span {
-
-    color: #6b7280;
 
 }
 
@@ -940,7 +953,9 @@ body.light-mode textarea {
 }
 
 
-body.light-mode .application-card {
+body.light-mode .application-card,
+body.light-mode .interview-card,
+body.light-mode .no-interviews {
 
     background: #f9fafb;
 
@@ -951,51 +966,20 @@ body.light-mode .application-card {
 
 body.light-mode .notes {
 
-    background: #ffffff;
+    background: white;
 
     color: #374151;
 
 }
 
 
-body.light-mode .analytics-header p {
-
-    color: #6b7280;
-
-}
-
-
-body.light-mode .bar-chart {
-
-    border-color: #d1d5db;
-
-}
-
-
-body.light-mode .empty-message h3 {
-
-    color: #111827;
-
-}
-
-
-body.light-mode footer {
-
-    border-color: #e5e7eb;
-
-}
-
-
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 
 @media (max-width: 1100px) {
 
     .dashboard {
 
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
 
     }
 
@@ -1017,14 +1001,12 @@ body.light-mode footer {
 
         flex-direction: column;
 
-        align-items: stretch;
-
     }
 
 
     .filters {
 
-        width: 100%;
+        flex-direction: column;
 
     }
 
@@ -1059,6 +1041,8 @@ body.light-mode footer {
         flex-direction: column;
 
         align-items: flex-start;
+
+        gap: 15px;
 
     }
 
@@ -1102,27 +1086,6 @@ body.light-mode footer {
     }
 
 
-    .chart-item {
-
-        width: 60px;
-
-    }
-
-
-    .bar {
-
-        width: 40px;
-
-    }
-
-
-    .filters {
-
-        flex-direction: column;
-
-    }
-
-
     .card-top {
 
         flex-direction: column;
@@ -1130,9 +1093,29 @@ body.light-mode footer {
     }
 
 
-    .card-actions {
+    .interview-header {
+
+        flex-direction: column;
 
         align-items: flex-start;
+
+        gap: 12px;
+
+    }
+
+
+    .interview-card {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .interview-date {
+
+        text-align: left;
 
     }
 
