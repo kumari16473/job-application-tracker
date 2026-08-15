@@ -1,13 +1,12 @@
 # JobTrack - Job Application Tracker 🚀
 
-A modern and responsive Job Application Tracker built using HTML, CSS and JavaScript.
+A modern Job Application Tracker built using HTML, CSS and JavaScript.
 
 ## Features
 
 - Add job applications
 - Edit applications
 - Delete applications
-- Track application status
 - Search applications
 - Filter applications
 - Salary tracking
@@ -18,8 +17,9 @@ A modern and responsive Job Application Tracker built using HTML, CSS and JavaSc
 - Dashboard statistics
 - Dark mode
 - Light mode
-- Theme preference saved using LocalStorage
-- Application data saved using LocalStorage
+- Application analytics chart
+- Success rate calculation
+- LocalStorage persistence
 - Responsive design
 
 ## Technologies
@@ -29,9 +29,23 @@ A modern and responsive Job Application Tracker built using HTML, CSS and JavaSc
 - JavaScript
 - LocalStorage
 
-## Run
+## How to Run
 
-Open `index.html` using Five Server in VS Code.
+1. Open the project in VS Code.
+2. Open `index.html`.
+3. Right-click the file.
+4. Select `Open with Five Server`.
+5. The application will open in the browser.
+
+## Analytics
+
+The dashboard automatically displays:
+
+- Applied applications
+- Interview applications
+- Selected applications
+- Rejected applications
+- Overall success rate
 
 ## Author
 

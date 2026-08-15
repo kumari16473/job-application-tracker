@@ -1,3 +1,7 @@
+/* =========================
+   GET HTML ELEMENTS
+========================= */
+
 const jobForm =
     document.getElementById("jobForm");
 
@@ -68,9 +72,51 @@ const themeToggle =
     document.getElementById("themeToggle");
 
 
-/* ==========================
-   APPLICATION DATA
-========================== */
+/* =========================
+   CHART ELEMENTS
+========================= */
+
+const appliedBar =
+    document.getElementById("appliedBar");
+
+const interviewBar =
+    document.getElementById("interviewBar");
+
+const selectedBar =
+    document.getElementById("selectedBar");
+
+const rejectedBar =
+    document.getElementById("rejectedBar");
+
+const chartAppliedValue =
+    document.getElementById(
+        "chartAppliedValue"
+    );
+
+const chartInterviewValue =
+    document.getElementById(
+        "chartInterviewValue"
+    );
+
+const chartSelectedValue =
+    document.getElementById(
+        "chartSelectedValue"
+    );
+
+const chartRejectedValue =
+    document.getElementById(
+        "chartRejectedValue"
+    );
+
+const successRate =
+    document.getElementById(
+        "successRate"
+    );
+
+
+/* =========================
+   DATA
+========================= */
 
 let applications =
     JSON.parse(
@@ -83,9 +129,9 @@ let applications =
 let editingId = null;
 
 
-/* ==========================
+/* =========================
    ADD / UPDATE
-========================== */
+========================= */
 
 jobForm.addEventListener(
     "submit",
@@ -191,9 +237,9 @@ jobForm.addEventListener(
 );
 
 
-/* ==========================
-   SAVE DATA
-========================== */
+/* =========================
+   SAVE
+========================= */
 
 function saveApplications() {
 
@@ -207,9 +253,9 @@ function saveApplications() {
 }
 
 
-/* ==========================
-   RENDER
-========================== */
+/* =========================
+   RENDER APPLICATIONS
+========================= */
 
 function renderApplications() {
 
@@ -324,6 +370,7 @@ function renderApplications() {
                                 ${application.status}
                             </span>
 
+
                             <div class="details">
 
                                 <span>
@@ -332,6 +379,7 @@ function renderApplications() {
                                         application.date
                                     )}
                                 </span>
+
 
                                 ${
                                     application.interviewDate
@@ -346,6 +394,7 @@ function renderApplications() {
                                     : ""
                                 }
 
+
                                 ${
                                     application.salary
                                     ? `
@@ -357,6 +406,7 @@ function renderApplications() {
                                     `
                                     : ""
                                 }
+
 
                                 ${
                                     application.location
@@ -371,6 +421,7 @@ function renderApplications() {
                                 }
 
                             </div>
+
 
                             ${
                                 application.notes
@@ -446,9 +497,9 @@ function renderApplications() {
 }
 
 
-/* ==========================
+/* =========================
    EDIT
-========================== */
+========================= */
 
 function editApplication(id) {
 
@@ -517,9 +568,9 @@ function editApplication(id) {
 }
 
 
-/* ==========================
-   CANCEL EDIT
-========================== */
+/* =========================
+   RESET FORM
+========================= */
 
 cancelBtn.addEventListener(
     "click",
@@ -545,9 +596,9 @@ function resetForm() {
 }
 
 
-/* ==========================
+/* =========================
    DELETE
-========================== */
+========================= */
 
 function deleteApplication(id) {
 
@@ -578,9 +629,9 @@ function deleteApplication(id) {
 }
 
 
-/* ==========================
+/* =========================
    OPEN JOB LINK
-========================== */
+========================= */
 
 function openJobLink(
     encodedLink
@@ -601,9 +652,9 @@ function openJobLink(
 }
 
 
-/* ==========================
-   DATE FORMAT
-========================== */
+/* =========================
+   DATE
+========================= */
 
 function formatDate(date) {
 
@@ -634,17 +685,17 @@ function formatDate(date) {
 }
 
 
-/* ==========================
-   DASHBOARD
-========================== */
+/* =========================
+   DASHBOARD + CHART
+========================= */
 
 function updateDashboard() {
 
-    totalApplications.textContent =
+    const total =
         applications.length;
 
 
-    appliedCount.textContent =
+    const applied =
         applications.filter(
             application =>
                 application.status ===
@@ -652,7 +703,7 @@ function updateDashboard() {
         ).length;
 
 
-    interviewCount.textContent =
+    const interviews =
         applications.filter(
             application =>
                 application.status ===
@@ -660,7 +711,7 @@ function updateDashboard() {
         ).length;
 
 
-    selectedCount.textContent =
+    const selected =
         applications.filter(
             application =>
                 application.status ===
@@ -668,19 +719,117 @@ function updateDashboard() {
         ).length;
 
 
-    rejectedCount.textContent =
+    const rejected =
         applications.filter(
             application =>
                 application.status ===
                 "Rejected"
         ).length;
 
+
+    totalApplications.textContent =
+        total;
+
+    appliedCount.textContent =
+        applied;
+
+    interviewCount.textContent =
+        interviews;
+
+    selectedCount.textContent =
+        selected;
+
+    rejectedCount.textContent =
+        rejected;
+
+
+    updateChart(
+        applied,
+        interviews,
+        selected,
+        rejected,
+        total
+    );
+
 }
 
 
-/* ==========================
+/* =========================
+   UPDATE CHART
+========================= */
+
+function updateChart(
+    applied,
+    interviews,
+    selected,
+    rejected,
+    total
+) {
+
+    const maxValue =
+        Math.max(
+            applied,
+            interviews,
+            selected,
+            rejected,
+            1
+        );
+
+
+    const maxHeight = 200;
+
+
+    appliedBar.style.height =
+        `${(applied / maxValue) * maxHeight}px`;
+
+
+    interviewBar.style.height =
+        `${(interviews / maxValue) * maxHeight}px`;
+
+
+    selectedBar.style.height =
+        `${(selected / maxValue) * maxHeight}px`;
+
+
+    rejectedBar.style.height =
+        `${(rejected / maxValue) * maxHeight}px`;
+
+
+    chartAppliedValue.textContent =
+        applied;
+
+    chartInterviewValue.textContent =
+        interviews;
+
+    chartSelectedValue.textContent =
+        selected;
+
+    chartRejectedValue.textContent =
+        rejected;
+
+
+    let rate = 0;
+
+
+    if (total > 0) {
+
+        rate =
+            Math.round(
+                (selected / total) * 100
+            );
+
+    }
+
+
+    successRate.textContent =
+        `${rate}%`;
+
+}
+
+
+/* =========================
    SEARCH
-========================== */
+========================= */
 
 searchInput.addEventListener(
     "input",
@@ -688,9 +837,9 @@ searchInput.addEventListener(
 );
 
 
-/* ==========================
+/* =========================
    FILTER
-========================== */
+========================= */
 
 filterStatus.addEventListener(
     "change",
@@ -698,9 +847,9 @@ filterStatus.addEventListener(
 );
 
 
-/* ==========================
-   HTML SECURITY
-========================== */
+/* =========================
+   SECURITY
+========================= */
 
 function escapeHTML(text) {
 
@@ -710,7 +859,8 @@ function escapeHTML(text) {
         );
 
 
-    div.textContent = text;
+    div.textContent =
+        text;
 
 
     return div.innerHTML;
@@ -718,9 +868,9 @@ function escapeHTML(text) {
 }
 
 
-/* ==========================
+/* =========================
    DARK / LIGHT MODE
-========================== */
+========================= */
 
 const savedTheme =
     localStorage.getItem(
@@ -788,8 +938,8 @@ themeToggle.addEventListener(
 );
 
 
-/* ==========================
+/* =========================
    INITIAL LOAD
-========================== */
+========================= */
 
 renderApplications();

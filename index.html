@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>JobTrack - Job Application Tracker</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -22,9 +24,13 @@
 
 </header>
 
+
 <main class="container">
 
-    <!-- Dashboard -->
+    <!-- =========================
+         DASHBOARD
+    ========================== -->
+
     <section class="dashboard">
 
         <div class="stat-card">
@@ -55,17 +61,132 @@
     </section>
 
 
-    <!-- Add / Edit Application -->
+    <!-- =========================
+         ANALYTICS
+    ========================== -->
+
+    <section class="analytics-section">
+
+        <div class="analytics-header">
+
+            <div>
+                <h2>Application Analytics</h2>
+
+                <p>
+                    Track your application progress
+                </p>
+            </div>
+
+            <div class="success-rate">
+                <span>Success Rate</span>
+                <strong id="successRate">0%</strong>
+            </div>
+
+        </div>
+
+
+        <div class="chart-container">
+
+            <div class="bar-chart">
+
+                <div class="chart-item">
+
+                    <div class="bar-value">
+                        <span id="chartAppliedValue">0</span>
+                    </div>
+
+                    <div
+                        class="bar applied-bar"
+                        id="appliedBar"
+                    ></div>
+
+                    <span class="chart-label">
+                        Applied
+                    </span>
+
+                </div>
+
+
+                <div class="chart-item">
+
+                    <div class="bar-value">
+                        <span id="chartInterviewValue">0</span>
+                    </div>
+
+                    <div
+                        class="bar interview-bar"
+                        id="interviewBar"
+                    ></div>
+
+                    <span class="chart-label">
+                        Interview
+                    </span>
+
+                </div>
+
+
+                <div class="chart-item">
+
+                    <div class="bar-value">
+                        <span id="chartSelectedValue">0</span>
+                    </div>
+
+                    <div
+                        class="bar selected-bar"
+                        id="selectedBar"
+                    ></div>
+
+                    <span class="chart-label">
+                        Selected
+                    </span>
+
+                </div>
+
+
+                <div class="chart-item">
+
+                    <div class="bar-value">
+                        <span id="chartRejectedValue">0</span>
+                    </div>
+
+                    <div
+                        class="bar rejected-bar"
+                        id="rejectedBar"
+                    ></div>
+
+                    <span class="chart-label">
+                        Rejected
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ADD APPLICATION
+    ========================== -->
+
     <section class="form-section">
 
-        <h2 id="formTitle">Add Job Application</h2>
+        <h2 id="formTitle">
+            Add Job Application
+        </h2>
+
 
         <form id="jobForm">
 
             <div class="form-grid">
 
                 <div class="input-group">
-                    <label>Company Name *</label>
+
+                    <label>
+                        Company Name *
+                    </label>
 
                     <input
                         type="text"
@@ -73,11 +194,15 @@
                         placeholder="Example: Google"
                         required
                     >
+
                 </div>
 
 
                 <div class="input-group">
-                    <label>Job Role *</label>
+
+                    <label>
+                        Job Role *
+                    </label>
 
                     <input
                         type="text"
@@ -85,54 +210,74 @@
                         placeholder="Example: Frontend Developer"
                         required
                     >
+
                 </div>
 
 
                 <div class="input-group">
-                    <label>Applied Date *</label>
+
+                    <label>
+                        Applied Date *
+                    </label>
 
                     <input
                         type="date"
                         id="date"
                         required
                     >
+
                 </div>
 
 
                 <div class="input-group">
-                    <label>Interview Date</label>
+
+                    <label>
+                        Interview Date
+                    </label>
 
                     <input
                         type="date"
                         id="interviewDate"
                     >
+
                 </div>
 
 
                 <div class="input-group">
-                    <label>Salary</label>
+
+                    <label>
+                        Salary
+                    </label>
 
                     <input
                         type="text"
                         id="salary"
                         placeholder="Example: ₹8 LPA"
                     >
+
                 </div>
 
 
                 <div class="input-group">
-                    <label>Location</label>
+
+                    <label>
+                        Location
+                    </label>
 
                     <input
                         type="text"
                         id="location"
                         placeholder="Example: Chennai / Remote"
                     >
+
                 </div>
 
 
                 <div class="input-group">
-                    <label>Status</label>
+
+                    <label>
+                        Status
+                    </label>
 
                     <select id="status">
 
@@ -158,13 +303,17 @@
 
 
                 <div class="input-group">
-                    <label>Job Link</label>
+
+                    <label>
+                        Job Link
+                    </label>
 
                     <input
                         type="url"
                         id="jobLink"
                         placeholder="https://example.com"
                     >
+
                 </div>
 
             </div>
@@ -172,7 +321,9 @@
 
             <div class="input-group notes-group">
 
-                <label>Notes</label>
+                <label>
+                    Notes
+                </label>
 
                 <textarea
                     id="notes"
@@ -209,17 +360,24 @@
     </section>
 
 
-    <!-- Applications -->
+    <!-- =========================
+         APPLICATIONS
+    ========================== -->
+
     <section class="applications-section">
 
         <div class="section-header">
 
             <div>
-                <h2>My Applications</h2>
+
+                <h2>
+                    My Applications
+                </h2>
 
                 <p>
                     Manage all your job applications
                 </p>
+
             </div>
 
 
@@ -269,7 +427,9 @@
             class="empty-message"
         >
 
-            <h3>No applications found</h3>
+            <h3>
+                No applications found
+            </h3>
 
             <p>
                 Add a job application to get started.

@@ -6,6 +6,7 @@
 
 
 body {
+
     font-family: Arial, sans-serif;
 
     background: #0f1117;
@@ -17,10 +18,13 @@ body {
     transition:
         background 0.3s,
         color 0.3s;
+
 }
 
 
-/* Header */
+/* =========================
+   HEADER
+========================= */
 
 .header {
 
@@ -37,6 +41,7 @@ body {
     align-items: center;
 
     gap: 20px;
+
 }
 
 
@@ -58,7 +63,9 @@ body {
 }
 
 
-/* Theme Button */
+/* =========================
+   THEME BUTTON
+========================= */
 
 .theme-btn {
 
@@ -90,7 +97,9 @@ body {
 }
 
 
-/* Container */
+/* =========================
+   CONTAINER
+========================= */
 
 .container {
 
@@ -103,7 +112,9 @@ body {
 }
 
 
-/* Dashboard */
+/* =========================
+   DASHBOARD
+========================= */
 
 .dashboard {
 
@@ -163,7 +174,199 @@ body {
 }
 
 
-/* Sections */
+/* =========================
+   ANALYTICS
+========================= */
+
+.analytics-section {
+
+    background: #171b24;
+
+    border: 1px solid #292e3a;
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.analytics-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.analytics-header h2 {
+
+    margin-bottom: 7px;
+
+}
+
+
+.analytics-header p {
+
+    color: #9ca3af;
+
+}
+
+
+.success-rate {
+
+    text-align: right;
+
+}
+
+
+.success-rate span {
+
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 14px;
+
+}
+
+
+.success-rate strong {
+
+    display: block;
+
+    color: #4ade80;
+
+    font-size: 28px;
+
+    margin-top: 5px;
+
+}
+
+
+/* Chart */
+
+.chart-container {
+
+    height: 300px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+}
+
+
+.bar-chart {
+
+    width: 80%;
+
+    height: 260px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-around;
+
+    border-bottom: 1px solid #303644;
+
+}
+
+
+.chart-item {
+
+    height: 100%;
+
+    width: 80px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+}
+
+
+.bar {
+
+    width: 55px;
+
+    min-height: 5px;
+
+    border-radius: 8px 8px 0 0;
+
+    transition:
+        height 0.5s ease;
+
+}
+
+
+.applied-bar {
+
+    background: #60a5fa;
+
+}
+
+
+.interview-bar {
+
+    background: #fbbf24;
+
+}
+
+
+.selected-bar {
+
+    background: #4ade80;
+
+}
+
+
+.rejected-bar {
+
+    background: #f87171;
+
+}
+
+
+.bar-value {
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+}
+
+
+.chart-label {
+
+    color: #9ca3af;
+
+    font-size: 13px;
+
+    margin-top: 10px;
+
+}
+
+
+/* =========================
+   FORM SECTIONS
+========================= */
 
 .form-section,
 .applications-section {
@@ -196,7 +399,9 @@ body {
 }
 
 
-/* Form */
+/* =========================
+   FORM
+========================= */
 
 .form-grid {
 
@@ -280,7 +485,7 @@ textarea {
 }
 
 
-/* Form Buttons */
+/* Buttons */
 
 .form-buttons {
 
@@ -336,7 +541,9 @@ textarea {
 }
 
 
-/* Section Header */
+/* =========================
+   APPLICATION HEADER
+========================= */
 
 .section-header {
 
@@ -369,7 +576,9 @@ textarea {
 }
 
 
-/* Application Card */
+/* =========================
+   APPLICATION CARD
+========================= */
 
 .application-card {
 
@@ -500,7 +709,7 @@ textarea {
 }
 
 
-/* Card Buttons */
+/* Card buttons */
 
 .card-actions {
 
@@ -562,7 +771,9 @@ textarea {
 }
 
 
-/* Empty Message */
+/* =========================
+   EMPTY MESSAGE
+========================= */
 
 .empty-message {
 
@@ -584,7 +795,9 @@ textarea {
 }
 
 
-/* Footer */
+/* =========================
+   FOOTER
+========================= */
 
 footer {
 
@@ -599,9 +812,9 @@ footer {
 }
 
 
-/* ==========================
+/* =========================
    LIGHT MODE
-========================== */
+========================= */
 
 body.light-mode {
 
@@ -640,6 +853,7 @@ body.light-mode .theme-btn {
 
 
 body.light-mode .stat-card,
+body.light-mode .analytics-section,
 body.light-mode .form-section,
 body.light-mode .applications-section {
 
@@ -688,9 +902,16 @@ body.light-mode .notes {
 }
 
 
-body.light-mode .applications-section > .section-header p {
+body.light-mode .analytics-header p {
 
     color: #6b7280;
+
+}
+
+
+body.light-mode .bar-chart {
+
+    border-color: #d1d5db;
 
 }
 
@@ -706,12 +927,12 @@ body.light-mode footer {
 
     border-color: #e5e7eb;
 
-    color: #6b7280;
-
 }
 
 
-/* Responsive */
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media (max-width: 1100px) {
 
@@ -753,6 +974,45 @@ body.light-mode footer {
     .form-grid {
 
         grid-template-columns: 1fr;
+
+    }
+
+
+    .analytics-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+    }
+
+
+    .success-rate {
+
+        text-align: left;
+
+    }
+
+
+    .bar-chart {
+
+        width: 100%;
+
+    }
+
+
+    .chart-item {
+
+        width: 60px;
+
+    }
+
+
+    .bar {
+
+        width: 40px;
 
     }
 
