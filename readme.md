@@ -53,3 +53,29 @@ Built as a Daily Coding Project.
 ## Latest Update
 
 Improved application search and user experience.
+## ✨ Features
+
+- Add and manage job applications
+- Edit and delete applications
+- Search applications by company or role
+- Filter applications by status
+- Track interview dates
+- Upcoming interview reminders
+- Application analytics dashboard
+- Success rate tracking
+- Dark and light mode
+- CSV export
+- Responsive design
+- LocalStorage data persistence
+
+## 🛠️ Technologies
+
+- HTML5
+- CSS3
+- JavaScript
+- LocalStorage
+- Git & GitHub
+
+## 📌 Project Status
+
+The project is actively being improved with new features and UI enhancements.
